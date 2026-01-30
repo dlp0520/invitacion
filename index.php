@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesta de Comadres - Carnaval Promo 90</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lobster&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6a1b9a; /* Morado */
+            --secondary: #ffeb3b; /* Amarillo */
+            --accent: #e91e63; /* Rosa */
+            --blue: #03a9f4; /* Azul */
+            --bg-gradient-1: #f3e5f5;
+            --bg-gradient-2: #fff9c4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            /* Fondo base suave */
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Importante para que el confeti no genere scroll */
+            padding: 20px;
+            position: relative;
+        }
+
+        /* --- NUEVO: Estilos para el fondo animado --- */
+        .falling-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Detrás de la tarjeta */
+            pointer-events: none; /* Para que no interfiera con los clics */
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            top: -10%;
+            border-radius: 2px;
+            animation: fall linear infinite;
+        }
+
+        /* Animación de caída constante */
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: translateX(0px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(20px) rotate(180deg) scale(0.9);
+            }
+            100% {
+                top: 110%; /* Cae hasta abajo de la pantalla */
+                transform: translateX(-20px) rotate(360deg) scale(1);
+                opacity: 0.8;
+            }
+        }
+        /* ----------------------------------------- */
+
+
+        .card {
+            background: rgba(255, 255, 255, 0.97);
+            max-width: 500px;
+            width: 100%;
+            border-radius: 25px;
+            /* Sombra más pronunciada para que destaque del fondo animado */
+            box-shadow: 0 15px 40px rgba(106, 27, 154, 0.2);
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            border: 3px solid var(--primary);
+            animation: slideUp 1s ease-out;
+            z-index: 10; /* Asegura que la tarjeta esté sobre el fondo animado */
+        }
+
+        /* Decoraciones de esquina (Emojis) */
+        .card::after {
+            content: '🥁';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 3.5rem;
+            transform: rotate(-15deg);
+            filter: drop-shadow(2px 2px 0px white);
+        }
+        
+        .card::before {
+            content: '🎺';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 3.5rem;
+            transform: rotate(15deg);
+            filter: drop-shadow(2px 2px 0px white);
+        }
+
+        h1 {
+            font-family: 'Lobster', cursive;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 0px var(--secondary);
+        }
+
+        .carnaval-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            /* Gradiente vibrante similar a la imagen */
+            background: linear-gradient(to right, #e91e63, #9c27b0, #03a9f4, #ffeb3b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+            /* Animación de rebote suave */
+            animation: bounce 2.5s ease-in-out infinite;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--blue);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            transition: transform 0.3s;
+        }
+        .tag:nth-child(2) { background: var(--accent); transform: rotate(2deg); }
+        .tag:nth-child(3) { background: var(--secondary); color: var(--primary); transform: rotate(-2deg); }
+        
+        .tag:hover { transform: scale(1.1) rotate(0deg)!important; }
+
+        .details-box {
+            background: #fffde7; /* Fondo amarillo muy claro */
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin: 25px 0;
+            border: 3px dotted var(--accent);
+            position: relative;
+        }
+
+        .date-large {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: left;
+            text-align: left;
+            margin: 12px 0;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .info-row i {
+            color: var(--accent);
+            margin-right: 12px;
+            font-size: 1.3rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .host {
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-family: 'Lobster', cursive;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-map {
+            background: white;
+            color: var(--blue);
+            border: 3px solid var(--blue);
+        }
+        
+        .btn-map:hover { background: var(--blue); color: white; }
+
+        .btn-confirm {
+            background: linear-gradient(45deg, #25D366, #128C7E); /* WhatsApp Green gradient */
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            border: 3px solid transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .btn:active { transform: translateY(-1px); }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* Animaciones de entrada */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(80px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.05) translateY(-5px); }
+        }
+        
+        /* Media Query para pantallas pequeñas */
+        @media (max-width: 480px) {
+            .card { padding: 30px 15px; }
+            .carnaval-title { font-size: 2.5rem; }
+            .date-large { font-size: 1.4rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="falling-background" id="falling-bg">
+        </div>
+
+    <div class="card">
+        <h1>Fiesta de Comadres</h1>
+        
+        <div class="carnaval-title">CARNAVAL</div>
+        
+        <div class="tags">
+            <span class="tag">🎉 Diversión</span>
+            <span class="tag">💃 Baile</span>
+            <span class="tag">😂 Alegría</span>
+        </div>
+
+        <div class="details-box">
+            <div class="date-large">SÁBADO 7 DE FEBRERO</div>
+            
+            <div class="info-row">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Av. Marcelo Quiroga Santa Cruz #570</span>
+            </div>
+            
+            <div class="info-row">
+                <i class="fas fa-landmark"></i>
+                <span>Referencia: Cerca Sub Alcaldía Cotahuma (Teleférico Amarillo), Final Buenos Aires.</span>
+            </div>
+
+            <div class="host">
+                ✨ ¡Les espera la PODEROSA PROMO 90! ✨
+            </div>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="https://www.google.com/maps?q=-16.519306,-68.142903 " target="_blank" class="btn btn-map">
+                <i class="fas fa-location-arrow"></i> Ver Ubicación en Mapa
+            </a>
+            
+            
+        </div>
+
+        <p class="footer-note">¡No faltes, la pasaremos genial!</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        // --- SCRIPT PARA EL FONDO DE CONFETI CONSTANTE ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgContainer = document.getElementById('falling-bg');
+            const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)', 'var(--blue)'];
+            const shapes = ['0%', '50%']; // Cuadrados y círculos
+
+            // Crear 50 piezas de confeti
+            for (let i = 0; i < 50; i++) {
+                let piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                
+                // Aleatorizar propiedades
+                piece.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Color
+                piece.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)]; // Forma
+                
+                // Aleatorizar velocidad y retraso de la animación para que no caigan juntos
+                let duration = Math.random() * 3 + 4; // Entre 4 y 7 segundos
+                let delay = Math.random() * 5; // Retraso inicial de hasta 5 segundos
+                
+                piece.style.animationDuration = `${duration}s`;
+                piece.style.animationDelay = `-${delay}s`; // Retraso negativo para que empiecen ya cayendo
+                
+                // Tamaño aleatorio entre 8px y 15px
+                let size = Math.random() * 7 + 8;
+                piece.style.width = `${size}px`;
+                piece.style.height = `${size}px`;
+
+                bgContainer.appendChild(piece);
+            }
+        });
+
+        // --- SCRIPT PARA EL ESTALLIDO EXTRA AL CONFIRMAR ---
+        document.querySelector('.btn-confirm').addEventListener('click', () => {
+            // Lanza un estallido extra de confeti desde el centro inferior
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.7 },
+                colors: ['#e91e63', '#03a9f4', '#ffeb3b', '#6a1b9a'],
+                startVelocity: 45
+            });
+        });
+    </script>
+</body>
+</html>
