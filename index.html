@@ -9,10 +9,10 @@
     
     <style>
         :root {
-            --primary: #6a1b9a; /* Morado */
-            --secondary: #ffeb3b; /* Amarillo */
-            --accent: #e91e63; /* Rosa */
-            --blue: #03a9f4; /* Azul */
+            --primary: #6a1b9a;
+            --secondary: #ffeb3b; 
+            --accent: #e91e63; 
+            --blue: #03a9f4; 
             --bg-gradient-1: #f3e5f5;
             --bg-gradient-2: #fff9c4;
         }
@@ -25,18 +25,18 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            /* Fondo base suave */
+         
             background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Importante para que el confeti no genere scroll */
+            overflow: hidden;
             padding: 20px;
             position: relative;
         }
 
-        /* --- NUEVO: Estilos para el fondo animado --- */
+       
         .falling-background {
             position: absolute;
             top: 0;
@@ -44,8 +44,8 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: 0; /* Detrás de la tarjeta */
-            pointer-events: none; /* Para que no interfiera con los clics */
+            z-index: 0; 
+            pointer-events: none; 
         }
 
         .confetti-piece {
@@ -58,7 +58,7 @@
             animation: fall linear infinite;
         }
 
-        /* Animación de caída constante */
+     
         @keyframes fall {
             0% {
                 top: -10%;
@@ -69,12 +69,11 @@
                 transform: translateX(20px) rotate(180deg) scale(0.9);
             }
             100% {
-                top: 110%; /* Cae hasta abajo de la pantalla */
+                top: 110%; 
                 transform: translateX(-20px) rotate(360deg) scale(1);
                 opacity: 0.8;
             }
         }
-        /* ----------------------------------------- */
 
 
         .card {
@@ -82,17 +81,17 @@
             max-width: 500px;
             width: 100%;
             border-radius: 25px;
-            /* Sombra más pronunciada para que destaque del fondo animado */
+       
             box-shadow: 0 15px 40px rgba(106, 27, 154, 0.2);
             padding: 40px 25px;
             text-align: center;
             position: relative;
             border: 3px solid var(--primary);
             animation: slideUp 1s ease-out;
-            z-index: 10; /* Asegura que la tarjeta esté sobre el fondo animado */
+            z-index: 10; 
         }
 
-        /* Decoraciones de esquina (Emojis) */
+       
         .card::after {
             content: '🥁';
             position: absolute;
@@ -125,13 +124,13 @@
             font-family: 'Fredoka One', cursive;
             font-size: 3.2rem;
             text-transform: uppercase;
-            /* Gradiente vibrante similar a la imagen */
+       
             background: linear-gradient(to right, #e91e63, #9c27b0, #03a9f4, #ffeb3b);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin: 10px 0;
-            /* Animación de rebote suave */
+          
             animation: bounce 2.5s ease-in-out infinite;
             line-height: 1.1;
             letter-spacing: 2px;
@@ -162,7 +161,7 @@
         .tag:hover { transform: scale(1.1) rotate(0deg)!important; }
 
         .details-box {
-            background: #fffde7; /* Fondo amarillo muy claro */
+            background: #fffde7; 
             border-radius: 20px;
             padding: 25px 20px;
             margin: 25px 0;
@@ -238,7 +237,7 @@
         .btn-map:hover { background: var(--blue); color: white; }
 
         .btn-confirm {
-            background: linear-gradient(45deg, #25D366, #128C7E); /* WhatsApp Green gradient */
+            background: linear-gradient(45deg, #25D366, #128C7E);
             color: white;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             border: 3px solid transparent;
@@ -259,7 +258,7 @@
             font-style: italic;
         }
 
-        /* Animaciones de entrada */
+      
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(80px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
@@ -270,7 +269,7 @@
             50% { transform: scale(1.05) translateY(-5px); }
         }
         
-        /* Media Query para pantallas pequeñas */
+      
         @media (max-width: 480px) {
             .card { padding: 30px 15px; }
             .carnaval-title { font-size: 2.5rem; }
@@ -327,30 +326,28 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
     <script>
-        // --- SCRIPT PARA EL FONDO DE CONFETI CONSTANTE ---
+      
         document.addEventListener('DOMContentLoaded', () => {
             const bgContainer = document.getElementById('falling-bg');
             const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)', 'var(--blue)'];
-            const shapes = ['0%', '50%']; // Cuadrados y círculos
+            const shapes = ['0%', '50%'];
 
-            // Crear 50 piezas de confeti
+           
             for (let i = 0; i < 50; i++) {
                 let piece = document.createElement('div');
                 piece.classList.add('confetti-piece');
                 
-                // Aleatorizar propiedades
-                piece.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
-                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Color
-                piece.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)]; // Forma
+               
+                piece.style.left = Math.random() * 100 + 'vw'; 
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)]; 
                 
-                // Aleatorizar velocidad y retraso de la animación para que no caigan juntos
-                let duration = Math.random() * 3 + 4; // Entre 4 y 7 segundos
-                let delay = Math.random() * 5; // Retraso inicial de hasta 5 segundos
+              
+                let duration = Math.random() * 3 + 4; 
+                let delay = Math.random() * 5; 
                 
                 piece.style.animationDuration = `${duration}s`;
-                piece.style.animationDelay = `-${delay}s`; // Retraso negativo para que empiecen ya cayendo
-                
-                // Tamaño aleatorio entre 8px y 15px
+                piece.style.animationDelay = `-${delay}s`; 
                 let size = Math.random() * 7 + 8;
                 piece.style.width = `${size}px`;
                 piece.style.height = `${size}px`;
@@ -359,9 +356,9 @@
             }
         });
 
-        // --- SCRIPT PARA EL ESTALLIDO EXTRA AL CONFIRMAR ---
+      
         document.querySelector('.btn-confirm').addEventListener('click', () => {
-            // Lanza un estallido extra de confeti desde el centro inferior
+          
             confetti({
                 particleCount: 150,
                 spread: 80,
@@ -373,3 +370,4 @@
     </script>
 </body>
 </html>
+
